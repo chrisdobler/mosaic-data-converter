@@ -1,8 +1,40 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { inputFile, outputFile } from './testSource.js';
+var parse = require('csv-parse');
+var async = require('async');
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    
+    const parser = (inputFile) => { parse(inputFile, function (err, data) {
+      // console.log(JSON.stringify(data));
+      // console.log(err);
+      let index = 0;
+      async.eachSeries(data, function (line, callback) {
+        // do something with the line
+        console.log('line',line)
+        if (index === 0) { //header
+
+        }
+        else { //content
+
+        }
+        // doSomething(line).then(function() {
+  
+        //   // when processing finishes invoke the callback to move to the next one
+          index = index + 1;
+          callback();
+        // });
+      })
+    })};  
+    parser(inputFile());
+    parser(outputFile());
+  }
+
   render() {
     return (
       <div className="App">
